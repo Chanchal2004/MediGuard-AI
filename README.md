@@ -165,7 +165,8 @@ The platform showcases its core AI-powered modules including OCR, Machine Learni
 
 A complete medication safety workflow from prescription upload to long-term adherence monitoring.
 
-<img width="1919" height="945" alt="image" src="https://github.com/user-attachments/assets/1fc8029d-4e0c-4495-a53e-34a838e93751" />
+<img width="1915" height="939" alt="image" src="https://github.com/user-attachments/assets/15c3de3e-8fe5-4953-a8de-13716b892e3a" />
+
 
 
 ---
@@ -174,8 +175,7 @@ A complete medication safety workflow from prescription upload to long-term adhe
 
 Production-ready Machine Learning models process adherence, severity, urgency, and risk predictions in real time.
 
-📷 Add Screenshot:
-`ml-engine.png`
+<img width="1917" height="940" alt="image" src="https://github.com/user-attachments/assets/5133e3f6-5fc3-4bb4-a034-56846e289ada" />
 
 ---
 
@@ -183,8 +183,8 @@ Production-ready Machine Learning models process adherence, severity, urgency, a
 
 Users securely authenticate using Google Sign-In before accessing personalized healthcare services.
 
-📷 Add Screenshot:
-`login-page.png`
+<img width="728" height="709" alt="image" src="https://github.com/user-attachments/assets/b9e337e1-49c5-4aa8-83d7-b4c2aec31830" />
+
 
 ---
 
@@ -192,6 +192,7 @@ Users securely authenticate using Google Sign-In before accessing personalized h
 
 Users provide personal information including age, gender, language, and weight to personalize recommendations and safety analysis.
 
+<img width="885" height="911" alt="image" src="https://github.com/user-attachments/assets/711ed955-b836-4be8-8b33-e90cd31a0c87" />
 
 
 
@@ -203,6 +204,9 @@ Patients specify chronic conditions and allergies.
 
 This context enables safer medication analysis and personalized recommendations.
 
+<img width="853" height="918" alt="image" src="https://github.com/user-attachments/assets/9e26ad18-e081-43c2-a7e4-beaa45f25d33" />
+
+
 
 
 
@@ -211,7 +215,8 @@ This context enables safer medication analysis and personalized recommendations.
 ## 👨‍👩‍👧 Caregiver Registration
 
 Users can register trusted caregivers who can later monitor medication adherence and risk indicators.
-<img width="1919" height="920" alt="image" src="https://github.com/user-attachments/assets/8c69cbc7-2f26-40c0-9dbf-3e67a0855053" />
+<img width="878" height="907" alt="image" src="https://github.com/user-attachments/assets/0be9f53b-b69c-463b-96b2-9a478ce3c156" />
+
 
 
 ---
@@ -228,8 +233,8 @@ Displays:
 - Active Medicines
 - Safety Alerts
 
-📷 Add Screenshot:
-`dashboard-overview.png`
+<img width="1917" height="944" alt="image" src="https://github.com/user-attachments/assets/17e2fa4a-8fdb-4456-aa8e-7c353937634d" />
+
 
 ---
 
@@ -246,8 +251,8 @@ Gemini Vision OCR automatically extracts:
 
 without manual entry.
 
-📷 Add Screenshot:
-`prescription-analysis.png`
+<img width="1917" height="941" alt="image" src="https://github.com/user-attachments/assets/96037a7c-fddd-4ba4-9cee-1be0e4522d7d" />
+
 
 ---
 
@@ -262,8 +267,8 @@ Users can mark medicines as:
 
 which continuously updates adherence analytics.
 
-📷 Add Screenshot:
-`schedule-page.png`
+<img width="1919" height="944" alt="image" src="https://github.com/user-attachments/assets/9dc989c1-e376-4790-ba3f-750d2a98e2bc" />
+
 
 ---
 
@@ -279,8 +284,8 @@ Examples:
 
 The AI responds using the patient's prescription and health profile.
 
-📷 Add Screenshot:
-`ai-copilot.png`
+<img width="1505" height="748" alt="image" src="https://github.com/user-attachments/assets/31723955-c617-46ea-8ce7-321acda52123" />
+
 
 ---
 
@@ -292,8 +297,8 @@ The system compares visual characteristics against active medications and identi
 
 This helps prevent medication confusion.
 
-📷 Add Screenshot:
-`pill-check.png`
+<img width="1919" height="876" alt="image" src="https://github.com/user-attachments/assets/d01a1fe7-d3f4-42f7-b325-4c1c523be939" />
+
 
 ---
 
@@ -310,8 +315,8 @@ Machine Learning models generate:
 
 and recommend nearby healthcare facilities.
 
-📷 Add Screenshot:
-`emergency-page.png`
+<img width="1491" height="746" alt="image" src="https://github.com/user-attachments/assets/165ae8d5-524a-41d2-a2d4-7a03776f8a54" />
+
 
 ---
 
@@ -327,8 +332,8 @@ Caregivers can monitor:
 - Safety Alerts
 - Escalation Status
 
-📷 Add Screenshot:
-`caregiver-dashboard.png`
+<img width="1479" height="747" alt="image" src="https://github.com/user-attachments/assets/2b58abb0-5bfe-4055-8e3c-1c0d6633a7a2" />
+
 
 ---
 
@@ -336,8 +341,10 @@ Caregivers can monitor:
 
 A dedicated caregiver interface provides secure access without exposing patient credentials.
 
-📷 Add Screenshot:
-`caregiver-view.png`
+
+<img width="975" height="735" alt="image" src="https://github.com/user-attachments/assets/8283bb6a-1815-45ff-8857-c6ec105c7075" />
+
+
 
 ---
 
@@ -351,8 +358,8 @@ Users can update:
 
 ensuring healthcare data remains accurate and current.
 
-📷 Add Screenshot:
-`settings-page.png`
+<img width="1527" height="757" alt="image" src="https://github.com/user-attachments/assets/a2ae870f-5ac8-4e2e-86c4-9deedaa9496b" />
+
 
 ---
 
