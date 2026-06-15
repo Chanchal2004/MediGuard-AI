@@ -131,7 +131,7 @@ Machine Learning Risk Prediction
 ↓
 Schedule Generation
 ↓
-AI Medical Copilot
+AI Medical Copilot 
 ↓
 Emergency Assistance
 ↓
@@ -145,8 +145,9 @@ Caregiver Monitoring
 
 MediGuard AI introduces all core capabilities including Prescription OCR, Safety Analysis, Medication Scheduling, AI Medical Assistance, Emergency Intelligence, and Caregiver Monitoring.
 
-📷 Add Screenshot:
-`landing-page.png`
+
+<img width="1919" height="944" alt="image" src="https://github.com/user-attachments/assets/d3fa79fa-a9ae-46a8-b19e-fe3c672d68a7" />
+
 
 ---
 
@@ -154,8 +155,9 @@ MediGuard AI introduces all core capabilities including Prescription OCR, Safety
 
 The platform showcases its core AI-powered modules including OCR, Machine Learning risk prediction, adherence monitoring, multilingual assistance, and emergency intelligence.
 
-📷 Add Screenshot:
-`features-section.png`
+
+<img width="1918" height="938" alt="image" src="https://github.com/user-attachments/assets/2a2ff17e-d72c-47d9-82bb-c62c57830ff5" />
+
 
 ---
 
@@ -163,8 +165,8 @@ The platform showcases its core AI-powered modules including OCR, Machine Learni
 
 A complete medication safety workflow from prescription upload to long-term adherence monitoring.
 
-📷 Add Screenshot:
-`patient-journey.png`
+<img width="1919" height="945" alt="image" src="https://github.com/user-attachments/assets/1fc8029d-4e0c-4495-a53e-34a838e93751" />
+
 
 ---
 
@@ -190,8 +192,8 @@ Users securely authenticate using Google Sign-In before accessing personalized h
 
 Users provide personal information including age, gender, language, and weight to personalize recommendations and safety analysis.
 
-📷 Add Screenshot:
-`about-you.png`
+
+
 
 ---
 
@@ -201,17 +203,16 @@ Patients specify chronic conditions and allergies.
 
 This context enables safer medication analysis and personalized recommendations.
 
-📷 Add Screenshot:
-`health-context.png`
+
+
 
 ---
 
 ## 👨‍👩‍👧 Caregiver Registration
 
 Users can register trusted caregivers who can later monitor medication adherence and risk indicators.
+<img width="1919" height="920" alt="image" src="https://github.com/user-attachments/assets/8c69cbc7-2f26-40c0-9dbf-3e67a0855053" />
 
-📷 Add Screenshot:
-`caregiver-setup.png`
 
 ---
 
