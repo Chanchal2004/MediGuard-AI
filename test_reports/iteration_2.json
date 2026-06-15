@@ -1,0 +1,45 @@
+{
+  "summary": "MediGuard AI – iteration-2 testing of 3 new features (caregiver magic-link, PDF report export, Gemini pill visual check) plus full regression. 9/9 new backend tests pass (caregiver invite create/list/revoke + expired→410, public read-only with no auth, sensitive-field sanitisation, PDF export with %PDF magic + content-disposition + 404 for unknown, pill check schema + real-Gemini vision proof via two different images). Regression suite 15/16 pass; the only failure is voice TTS returning a transient 502 from the upstream provider (unrelated to this iteration). Frontend: landing hero shows 'Patient safety, worth a second pair of eyes' and contains NO hardcoded marketing numbers (62/100, 7 medicines, 94% adherence not present). Authenticated /app/caregiver, /app/pill-check, /app/prescriptions all render; UI invite creation produces Copy/Revoke buttons; rx-pdf-btn downloads a real ~3.2 KB PDF; public /cg/{token} renders patient name, RiskGauge, adherence and active medicines with NO auth cookie.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/voice/tts", "issue": "Transient 502 from upstream TTS provider (HTML CF error page). Pre-existing dependency; not introduced by this iteration. Retry usually succeeds."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Public /cg/{token}", "issues": ["Adherence card uses label 'ADHERENCE' (uppercase) — works but unusual; ensure the score number color contrasts on light theme."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration2_features.py",
+    "/app/backend/tests/test_mediguard_backend.py",
+    "/app/test_reports/pytest/iteration2_results.xml"
+  ],
+  "action_items": [
+    "(Optional) Add data-testid='rx-card-{id}' on each prescription list item in Prescriptions.jsx so automated tests don't have to fall back to text selectors.",
+    "(Optional) Add retry/backoff or graceful degradation around /api/voice/tts when the upstream returns 5xx — currently surfaces a raw 500 with HTML body.",
+    "Server.py is now >1080 lines — strongly consider splitting routers (caregiver/pill/reports into their own modules) per code-review threshold."
+  ],
+  "critical_code_review_comments": [
+    "server.py grew from 818 → 1085 lines; routes for caregiver/pill/reports should move into separate APIRouters.",
+    "public_caregiver_view recomputes adherence inline (duplicates logic from /api/adherence/summary). Extract a private helper that takes a user_id to avoid drift.",
+    "caregiver_invite token uses new_id('cgt') + uuid4().hex[:12] (~22+12 chars). Acceptable, but consider secrets.token_urlsafe(24) for uniformity and cryptographic strength.",
+    "/api/reports/{prescription_id}/pdf is synchronous reportlab inside an async handler — for large prescriptions this can block the event loop briefly. Wrap _build_pdf in asyncio.to_thread.",
+    "Pill check writes upload bytes to a tempfile then deletes — fine, but no per-user rate-limit; combined with Gemini cost, add a simple in-memory throttle.",
+    "DELETE /api/caregiver/invite/{token} returns ok:true even when no document matched (idempotent but silently hides typos). Consider 404 when matched_count==0."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration2_features.py (new)"
+  ],
+  "success_rate": {"backend": "100% on iteration-2 (9/9); 93.75% regression (15/16) — TTS 502 is upstream transient", "frontend": "100% on critical flows (landing/caregiver/pill-check/PDF download/public-cg)"},
+  "test_credentials": "session_token=test_session_mediguard_v1 (Bearer + cookie) for user_id=user_test_mediguard. For headless browsers, override UA to a real Chrome string to bypass Cloudflare HeadlessChrome filtering.",
+  "seed_data_creation": "Tests insert one expired caregiver invite directly in mongo (cleaned up). Each pill-check test issues 1-2 real Gemini-Vision calls; caregiver invites created during tests are revoked/deleted on teardown.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run `pytest backend/tests/test_iteration2_features.py -v` for new-feature regression and `pytest backend/tests/test_mediguard_backend.py -v` for full regression. Frontend playwright MUST set UA to a real Chrome string and set cookie session_token=test_session_mediguard_v1 on domain medication-intel.preview.emergentagent.com (secure, sameSite=None) — otherwise Cloudflare blocks /api fetches and the SPA hangs on 'Loading...'. Public route /cg/{token} requires no cookie. PDF button only appears after clicking a prescription card — cards currently lack a stable data-testid (use text='Dr Sharma' fallback).",
+  "rca_of_the_issue": "None for this iteration. Voice TTS 502 traced to upstream provider's CF edge returning HTML — pre-existing, not caused by this iteration's changes."
+}

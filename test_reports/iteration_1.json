@@ -1,0 +1,50 @@
+{
+  "summary": "End-to-end testing of MediGuard AI MVP (backend + frontend). 16 pytest tests covering health, auth, profile, prescription OCR (real Gemini 3 Pro via Emergent LLM key with a PIL-synthesized prescription image), dose events, adherence, dashboard, emergency (OSM Overpass), copilot SSE, voice TTS, and caregiver. Frontend tested via Playwright for landing/login/theme/auth-gated /app with session cookie. Found and fixed one production bug in osm_service: missing User-Agent header caused Overpass to return 406 Not Acceptable and zero facilities. After fix, all backend tests pass (16/16) and all frontend critical flows pass.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Landing page", "issue": "AuthContext probes /api/auth/me on public landing page producing two 401 console errors. Cosmetic but noisy.", "affected_selectors": []}
+    ],
+    "design_issues": [
+      {"screen": "Dashboard adherence chart", "issues": ["Recharts emits width(-1)/height(-1) warning on initial mount before ResponsiveContainer measures parent. Visual rendering is correct after settle."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_mediguard_backend.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional) Suppress AuthContext /api/auth/me call on public landing route to remove harmless 401 console noise.",
+    "(Optional) Set minWidth/minHeight on adherence chart container to silence Recharts warnings.",
+    "Verify Google sign-in button redirect target in production (button uses JS click handler, not href; could not be verified without triggering navigation away)."
+  ],
+  "critical_code_review_comments": [
+    "BUG FIXED: /app/backend/osm_service.py find_nearby_facilities was missing a User-Agent header on the Overpass POST. Overpass at overpass-api.de returns HTTP 406 Not Acceptable without a UA, which silently made facilities empty for every emergency assessment. Added User-Agent='MediGuardAI/1.0' (already present on the Nominatim geocode call).",
+    "Minor: server.py line 609 has a precedence bug: `if lat is None or lon is None and profile.get('location')` is parsed as `lat is None or (lon is None and profile.get('location'))`. Wrap in parentheses: `if (lat is None or lon is None) and profile.get('location')`. Did not break the tested flow because location_query path resolves both before reaching this branch, but it can cause incorrect fallback when only one coord is provided.",
+    "Minor: server.py uses deprecated FastAPI on_event startup/shutdown (FastAPI >=0.110 recommends lifespan context manager). Not blocking.",
+    "Server.py at 818 lines is approaching the 700-line threshold for a split (routes for auth/profile/prescriptions/dose/dashboard/emergency/copilot/voice/caregiver could move into routers).",
+    "No backend rate-limiting or auth throttling on /api/voice/tts and /api/copilot/chat which call paid LLM APIs.",
+    "DoseEvent collection has index on (user_id, scheduled_for) but query uses ISO-string comparisons; index works correctly because all stored scheduled_for are ISO strings — confirm in production seed."
+  ],
+  "updated_files": [
+    "/app/backend/osm_service.py",
+    "/app/backend/tests/test_mediguard_backend.py"
+  ],
+  "success_rate": {"backend": "100% (16/16 after osm fix)", "frontend": "100% on critical flows"},
+  "test_credentials": "session_token=test_session_mediguard_v1 (Bearer or cookie) for user_id=user_test_mediguard. Seed already present in mongo.",
+  "seed_data_creation": "Tests upsert a profile (age 68, Diabetes) and upload a PIL-synthesized prescription PNG with Amlodipine/Metformin/Atorvastatin. Gemini 3 Pro reliably extracts these meds, auto-creating 14-day dose events.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend test suite at /app/backend/tests/test_mediguard_backend.py is the regression suite — re-run with `pytest backend/tests/test_mediguard_backend.py -v`. Real Gemini calls cost tokens (~3 prescription pipeline calls per run). If Gemini occasionally fails to extract medicines, dose_events test will skip gracefully. Frontend session-cookie injection works on the preview URL with domain medication-intel.preview.emergentagent.com.",
+  "rca_of_the_issue": {
+    "bug": "Emergency assessment returned empty facilities {hospitals:[], clinics:[], pharmacies:[]} for any valid lat/lon (e.g., Bengaluru).",
+    "rca": "osm_service.find_nearby_facilities issued an httpx POST to overpass-api.de WITHOUT a User-Agent header. Overpass enforces UA and replies with HTTP 406 Not Acceptable + HTML body. The code only checked status_code != 200 and returned empty lists, swallowing the failure.",
+    "reproduction": "curl -sS -X POST https://overpass-api.de/api/interpreter -d 'data=[out:json];node[\"amenity\"=\"hospital\"](around:5000,12.97,77.59);out;' → 406. Same query with -H 'User-Agent: x' → 200.",
+    "mitigation": "Added `headers={'User-Agent': 'MediGuardAI/1.0'}` to the AsyncClient in find_nearby_facilities. Verified Bengaluru now returns >0 hospitals/clinics/pharmacies."
+  }
+}

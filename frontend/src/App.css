@@ -1,0 +1,26 @@
+/* MediGuard AI App-specific styles */
+.App { min-height: 100vh; }
+
+.dot-pattern {
+    background-image: radial-gradient(hsl(var(--muted-foreground) / 0.15) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.85rem;
+    color: hsl(var(--muted-foreground));
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.sidebar-link:hover {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+}
+.sidebar-link.active {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}

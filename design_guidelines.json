@@ -1,0 +1,122 @@
+{
+  "project_name": "MediGuard AI",
+  "theme": "hybrid_fullstack",
+  "archetype": "1 - Organic & Earthy",
+  "design_philosophy": "Serene clinical sophistication. Trust-inspiring, editorial, and premium. Generous spacing with an Apple-style crystal glassmorphism aesthetic over organic, textured backgrounds (grain/noise). Asymmetric layouts to break the generic medical blue standard.",
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Manrope",
+    "heading_strategy": "Tight letter spacing (tracking-tight), fluid scaling up to text-6xl. No standard Inter or Roboto. Rotate font weights intentionally.",
+    "body_strategy": "Clean, highly legible, leading-relaxed for long-form medical explanations."
+  },
+  "colors": {
+    "light": {
+      "background": "#FAFAF9",
+      "surface": "rgba(255, 255, 255, 0.7)",
+      "primary": "#2B4C3B",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#E07A5F",
+      "secondary_foreground": "#FFFFFF",
+      "accent": "#F4F1DE",
+      "muted": "#E5E5E5",
+      "text": "#1C1C1C",
+      "text_muted": "#666666",
+      "border": "rgba(0, 0, 0, 0.08)"
+    },
+    "dark": {
+      "background": "#0F1110",
+      "surface": "rgba(22, 25, 23, 0.6)",
+      "primary": "#95D5B2",
+      "primary_foreground": "#0F1110",
+      "secondary": "#F28482",
+      "secondary_foreground": "#FFFFFF",
+      "accent": "#2B4C3B",
+      "muted": "#2A2E2C",
+      "text": "#F8F9FA",
+      "text_muted": "#A1A1AA",
+      "border": "rgba(255, 255, 255, 0.1)"
+    },
+    "semantic": {
+      "emergency_green": "#4ADE80",
+      "emergency_yellow": "#FBBF24",
+      "emergency_orange": "#F97316",
+      "emergency_red": "#EF4444"
+    }
+  },
+  "surfaces": {
+    "glassmorphism": {
+      "base": "backdrop-blur-xl",
+      "light": "bg-white/70 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)]",
+      "dark": "bg-black/60 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.12)]",
+      "note": "Use crystal glassmorphism for floating navs, sticky headers, and modal overlays. For heavy data charts in the dashboard, fallback to Solid Backgrounds to prevent visual refraction of data."
+    },
+    "cards": {
+      "light": "bg-white border border-border/40 shadow-sm rounded-2xl",
+      "dark": "bg-[#161917] border border-white/5 shadow-sm rounded-2xl",
+      "hover": "hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing (2-3x). Use p-8, p-12, p-16 for containers. Containers with borders MUST have internal padding (p-6 or p-8) to prevent text collision.",
+    "landing_page": {
+      "grid": "Bento Grid Mode A (Tetris Grid). grid-cols-1 md:grid-cols-8 lg:grid-cols-12 with wide gap-8 to gap-12.",
+      "hero": "Asymmetric hero with max overlay opacity bg-black/40 (dark) or bg-white/30 (light).",
+      "padding": "py-24 md:py-32"
+    },
+    "dashboard": {
+      "grid": "Control Room Grid. grid-cols-1 md:grid-cols-3 lg:grid-cols-4 with gap-6. Use h-full on children to ensure they stretch.",
+      "padding": "p-6 lg:p-8"
+    }
+  },
+  "motion": {
+    "framer_motion": {
+      "hover": "Scale 1.02 on interactive cards, text color brightens.",
+      "page_transition": "Fade in with slight upward translation (y: 20, opacity: 0 -> 1, duration: 0.4s).",
+      "stagger": "List items (medicines, hospital lists) should stagger in with 0.1s delay."
+    },
+    "ocr_animation": "Scanning laser effect using Framer Motion (animated line traversing the document bounds) with glowing blur-md."
+  },
+  "components": {
+    "navigation": "Sticky header (z-50) using crystal glassmorphism. Desktop links fully visible. Mobile hamburger.",
+    "buttons": "Rounded-full or rounded-xl (Apple style). Primary CTA uses primary color. Hover state must explicitly define text color.",
+    "charts": "Shadcn/Recharts. Use semantic colors. Dark mode charts must have solid dark background for legibility.",
+    "forms": "Shadcn inputs heavily customized. Padding expanded (h-12), subtle border focus ring (focus:ring-2 focus:ring-primary/50). Never use native <input>.",
+    "tabs": "Override Shadcn tablist height from h-9 to h-auto to fit longer text.",
+    "risk_gauge": "D3.js or SVG based semi-circle gauge. 0-100 animated fill using semantic colors (green -> yellow -> orange -> red)."
+  },
+  "accessibility": {
+    "contrast": "Ensure 4.5:1 for standard text. Use text shadow over images.",
+    "testing_attributes": "All interactive elements MUST include data-testid (e.g., data-testid='upload-prescription-btn').",
+    "motion": "Respect prefers-reduced-motion."
+  },
+  "media_and_assets": {
+    "icons": "lucide-react (default for standard interactions) + @phosphor-icons/react (for high-end duotone clinical icons).",
+    "grain_overlay": "Fixed inset-0 pointer-events-none opacity-[0.03] z-50 bg-[url('data:image/svg+xml,...noise...')] (Implementation detail left to agent, but required for depth).",
+    "image_urls": {
+      "hero_background": {
+        "url": "https://images.pexels.com/photos/7789620/pexels-photo-7789620.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Clean, well-equipped modern medical examination room. Use with heavy gradient overlay."
+      },
+      "abstract_texture": {
+        "url": "https://images.pexels.com/photos/29543899/pexels-photo-29543899.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Abstract green painting. Use as subtle background texture for the risk score or AI copilot section."
+      },
+      "clinic_secondary": {
+        "url": "https://images.pexels.com/photos/7789616/pexels-photo-7789616.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Minimalist examination room for secondary features (e.g., Caregiver section)."
+      }
+    }
+  },
+  "instructions_to_main_agent": [
+    "NOTE: The application strictly uses .js/.jsx files (JavaScript), not TypeScript. DO NOT create .tsx files.",
+    "Initialize Tailwind config with Outfit and Manrope fonts. Ensure both weights (Light, Regular, Medium, Bold) are imported via Google Fonts or standard imports.",
+    "Setup Shadcn UI using Javascript. Configure standard components (Card, Button, Input, Dialog, Tabs) but override their default borders/shadows to match the 'glassmorphism' and 'cards' specs in this JSON.",
+    "Implement light/dark mode toggle using next-themes or raw React context. Ensure all custom colors from this JSON map to CSS variables.",
+    "For the OCR upload, build a dropzone with a 'scanning' Framer Motion animation.",
+    "For the AI Copilot and Emergency panels, use generous padding (p-6/p-8) and ensure strong contrast ratios.",
+    "Do NOT use Inter or Roboto anywhere.",
+    "Add data-testid to every single button, link, tab, and form input (e.g., data-testid='login-button').",
+    "Build the dashboard using CSS Grid (md:grid-cols-3 or 4) with varying row spans for bento-box asymmetry.",
+    "Use Phosphor icons (@phosphor-icons/react) or Lucide React for medical specific iconography."
+  ]
+}

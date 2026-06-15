@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root {
+    color-scheme: light dark;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Manrope', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--mg-bg);
+    color: var(--mg-text);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+@layer base {
+    :root {
+        /* MediGuard light palette (Organic & Earthy) */
+        --mg-bg: #FAFAF9;
+        --mg-bg-elevated: rgba(255, 255, 255, 0.7);
+        --mg-text: #1C1C1C;
+        --mg-text-muted: #595959;
+        --mg-primary: #2B4C3B;
+        --mg-primary-foreground: #FFFFFF;
+        --mg-secondary: #E07A5F;
+        --mg-accent: #F4F1DE;
+        --mg-border: rgba(0, 0, 0, 0.08);
+
+        /* shadcn tokens mapped */
+        --background: 60 6% 98%;
+        --foreground: 0 0% 11%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 11%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 11%;
+        --primary: 139 27% 23%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 14 65% 63%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 50 36% 91%;
+        --muted-foreground: 0 0% 35%;
+        --accent: 50 36% 91%;
+        --accent-foreground: 0 0% 11%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 0 0% 90%;
+        --input: 0 0% 90%;
+        --ring: 139 27% 23%;
+        --chart-1: 139 27% 38%;
+        --chart-2: 14 65% 63%;
+        --chart-3: 48 70% 58%;
+        --chart-4: 22 75% 50%;
+        --chart-5: 359 74% 60%;
+        --radius: 1rem;
+    }
+
+    .dark {
+        --mg-bg: #0F1110;
+        --mg-bg-elevated: rgba(22, 25, 23, 0.6);
+        --mg-text: #F8F9FA;
+        --mg-text-muted: #A1A1AA;
+        --mg-primary: #95D5B2;
+        --mg-primary-foreground: #0F1110;
+        --mg-secondary: #F28482;
+        --mg-accent: #2B4C3B;
+        --mg-border: rgba(255, 255, 255, 0.1);
+
+        --background: 140 6% 6%;
+        --foreground: 0 0% 97%;
+        --card: 140 7% 9%;
+        --card-foreground: 0 0% 97%;
+        --popover: 140 7% 9%;
+        --popover-foreground: 0 0% 97%;
+        --primary: 140 47% 71%;
+        --primary-foreground: 140 8% 7%;
+        --secondary: 1 80% 73%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 140 6% 16%;
+        --muted-foreground: 0 0% 70%;
+        --accent: 139 27% 23%;
+        --accent-foreground: 0 0% 97%;
+        --destructive: 0 70% 55%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 0 0% 18%;
+        --input: 0 0% 18%;
+        --ring: 140 47% 71%;
+        --chart-1: 140 47% 65%;
+        --chart-2: 1 80% 73%;
+        --chart-3: 48 80% 65%;
+        --chart-4: 22 80% 60%;
+        --chart-5: 359 80% 70%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        font-weight: 600;
+    }
+}
+
+/* Glassmorphism utilities */
+.glass {
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    background: var(--mg-bg-elevated);
+    border: 1px solid var(--mg-border);
+}
+
+.glass-card {
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    background: var(--mg-bg-elevated);
+    border: 1px solid var(--mg-border);
+    border-radius: 1.25rem;
+}
+
+/* Grain overlay (subtle) */
+.grain::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* OCR scanning laser */
+@keyframes mg-scan {
+    0%   { top: 0%; opacity: 0.0; }
+    10%  { opacity: 1; }
+    50%  { top: 100%; opacity: 1; }
+    60%  { opacity: 0; }
+    100% { top: 0%; opacity: 0; }
+}
+.scan-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+    box-shadow: 0 0 24px 6px hsl(var(--primary) / 0.5);
+    animation: mg-scan 2.4s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--muted)); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
+
+/* Risk gauge animation */
+@keyframes mg-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+.pulse-soft { animation: mg-pulse 2s ease-in-out infinite; }
+
+/* Selection */
+::selection {
+    background: hsl(var(--primary) / 0.25);
+    color: hsl(var(--foreground));
+}
+
+/* Asymmetric hero text */
+.hero-headline {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+}
+
+.text-emergency-green { color: #4ADE80; }
+.text-emergency-yellow { color: #FBBF24; }
+.text-emergency-orange { color: #F97316; }
+.text-emergency-red { color: #EF4444; }
+.bg-emergency-green { background-color: #4ADE80; }
+.bg-emergency-yellow { background-color: #FBBF24; }
+.bg-emergency-orange { background-color: #F97316; }
+.bg-emergency-red { background-color: #EF4444; }
